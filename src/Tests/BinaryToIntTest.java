@@ -34,7 +34,7 @@ public class BinaryToIntTest {
 
         Integer tempInt = new Integer(expected);
 
-        assertEquals(BinaryToInt.calc(tempString, sc), tempInt.intValue());
+        assertEquals(BinaryToInt.calc(tempString), tempInt.intValue());
 
         System.out.println("Test over.");
 

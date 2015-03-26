@@ -37,10 +37,13 @@ public class App {
 
                 String tempString = sc.nextLine();
 
-                System.out.println("Your integer is: " + BinaryToInt.calc(tempString, sc));
+                System.out.println("Your integer is: " + BinaryToInt.calc(tempString));
                 menu(sc);
                 break;
             case "2":
+                System.out.println("Quitting...");
+                break;
+            case "3":
                 System.out.println("Quitting...");
                 break;
             default:

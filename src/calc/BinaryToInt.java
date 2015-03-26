@@ -16,7 +16,7 @@ public class BinaryToInt {
     private static int outInt = 0;
     private static boolean validInt = true;
 
-    public static int calc(String tempString, Scanner sc) {
+    public static int calc(String tempString) {
 
         validInt  = true;
 
