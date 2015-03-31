@@ -1,113 +1,82 @@
 package calc;
 
-import extra.Expa;
-
-import java.util.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Chiggie on 3/26/2015.
  */
 public class IntToBinary {
 
-     public static int calc(int input) {
+    public static int calc(int input) {
 
-         return 0;
-     }
+        BigDecimal dividend = new BigDecimal(input);
+        System.out.println("dividend is: " + dividend);
+        BigDecimal remainder;
+        // System.out.println("quotientAndRemainder is: " + quotientAndRemainder);
 
-    // Duo # 1
-    public static List<Integer> ByPowerOf2S(int input) {
+        BigDecimal divisor = new BigDecimal(2);
+        BigDecimal array[];
 
-        List<Integer> divisorList = new ArrayList<>();
-        int productOfPowerOf2 = 1;
+        ArrayList<Character> stringArray = new ArrayList<>();
 
-        boolean useAssignedRem = input > 1;
-        boolean inputIs0 = input == 0;
-        boolean inputIs1 = input == 1;
-        Iterator<Integer> tempIt = divisorList.iterator();
-        int holdIt = 0;
-        boolean keepIt;
-        boolean endIt;
+        while (dividend.intValue() > 0) {
 
-        if (useAssignedRem) {
+            array = dividend.divideAndRemainder(divisor);
+            // System.out.println("array[] is: " + array);
 
-            for (int i = input; i > 0; i--) {
+            dividend = array[0];
+            System.out.println("Dividend is: " + dividend);
 
-                productOfPowerOf2 *= 2;
-                Expa.printValue("productOfPower2", productOfPowerOf2);
+            remainder = array[1];
+            System.out.println("remainder is: " + remainder);
 
-                try {
-                    holdIt += tempIt.next();
-                } catch (NoSuchElementException e) {
-                    holdIt += 0;
-                } catch (ConcurrentModificationException e) {
-                    holdIt += 0;
-                }
+            if (isAddChar(remainder.intValue())) {
 
-                keepIt = productOfPowerOf2 + holdIt < input;
-                endIt = productOfPowerOf2 + holdIt == input;
+                stringArray.add('1');
 
-                if (keepIt) {
-                    divisorList.add(productOfPowerOf2);
-                } else if (endIt) {
-                    divisorList.add(productOfPowerOf2);
-                    i = 0;
-                } else {
-                    i = 0;
-                }
+            } else {
+
+                stringArray.add('0');
 
             }
 
-            holdIt += tempIt.next();
-            Expa.printValue("divisorList", divisorList);
+        }
 
-        } else if (inputIs0) {
+        Collections.reverse(stringArray);
 
-            divisorList.add(0);
+        StringBuilder transAlA = new StringBuilder(stringArray.size());
+        for (Character c: stringArray) {
+            transAlA.append(c);
+        }
+        String transAlAS = transAlA.toString();
+        Integer transAlAInteger = new Integer(transAlAS);
+        int output = transAlAInteger.intValue();
 
-        } else if (inputIs1) {
+        return output;
+    }
 
-            divisorList.add(1);
+    public static boolean isAddChar(int input) {
+
+        boolean check1 = input == 1;
+        boolean check0 = input == 0;
+
+        if (check1) {
+
+            return true;
+
+        } else if (check0) {
+
+            return false;
 
         } else {
 
-            System.out.println("You seriously screwed something up. As in, 'Holy crap, I was never expecting anyone to " +
-                    "see this message' kind of screwed up.");
-
-            divisorList.add(-1);
-
-        }
-
-        return divisorList;
-
-    }
-
-    // Duo # 2
-    public static int addUp(List<Integer> divisorList) {
-
-        int total = 0;
-
-        Iterator<Integer> tempIt = divisorList.iterator();
-
-        for (int i: divisorList) {
-
-            total += tempIt.next();
+            System.out.println("OH GOD WHAT HAVE YOU DONE. Seriously, though. This should never happen.");
+            System.out.println("AKA: The test is broken. If you don't know what that means, good.");
+            return false;
 
         }
-
-        return total;
-    }
-
-    public static int highest2Generator(int input) {
-
-        int power2 = 1;
-
-        while (power2 < input) {
-
-            power2 *= 2;
-
-        }
-
-        return power2 / 2;
 
     }
 
